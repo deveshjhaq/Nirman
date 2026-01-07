@@ -11,6 +11,7 @@ from app.routes import integrations_extended
 from app.routes import coding_agent
 from app.routes import agent
 from app.routes import agent_chat
+from app.routes import llm_keys
 
 # Import config
 from app.core.config import APP_VERSION, APP_NAME
