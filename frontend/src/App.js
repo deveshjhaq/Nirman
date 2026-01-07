@@ -46,6 +46,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/download" element={<Download />} />
+          <Route path="/docs" element={<Docs />} />
           
           {/* Protected Routes - Require Authentication */}
           <Route path="/dashboard" element={
