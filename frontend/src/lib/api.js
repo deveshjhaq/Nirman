@@ -205,6 +205,30 @@ export const aiKeysAPI = {
   toggleKey: (provider, is_active) => api.put(`/ai-keys/${provider}/toggle?is_active=${is_active}`)
 };
 
+// Universal LLM Keys API
+export const llmKeysAPI = {
+  // Key management
+  listKeys: () => api.get('/llm-keys'),
+  createKey: (name, allowed_providers) => api.post('/llm-keys', { name, allowed_providers }),
+  getKey: (keyId) => api.get(`/llm-keys/${keyId}`),
+  updateKey: (keyId, data) => api.put(`/llm-keys/${keyId}`, data),
+  deleteKey: (keyId) => api.delete(`/llm-keys/${keyId}`),
+  regenerateKey: (keyId) => api.post(`/llm-keys/${keyId}/regenerate`),
+  
+  // Credits
+  addCredits: (keyId, amount, payment_method = 'wallet') => 
+    api.post(`/llm-keys/${keyId}/add-credits`, { amount, payment_method }),
+  getCreditsHistory: (keyId, limit = 50) => 
+    api.get(`/llm-keys/${keyId}/credits-history?limit=${limit}`),
+  
+  // Usage & Stats
+  getUsage: (keyId, days = 30) => api.get(`/llm-keys/${keyId}/usage?days=${days}`),
+  getOverviewStats: () => api.get('/llm-keys/overview/stats'),
+  
+  // Pricing
+  getPricing: () => api.get('/llm-keys/pricing/info')
+};
+
 // Build API - SSE streaming build system
 export const buildAPI = {
   // Start a new build job
