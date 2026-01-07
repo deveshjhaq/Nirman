@@ -251,7 +251,7 @@ const Landing = () => {
               <h3 className="font-semibold text-gray-900 mb-4">Resources</h3>
               <ul className="space-y-2.5">
                 <li><a href="#" className="text-gray-500 hover:text-gray-900 transition-colors text-sm">Blog</a></li>
-                <li><a href="#" className="text-gray-500 hover:text-gray-900 transition-colors text-sm">Docs</a></li>
+                <li><a href="/docs" className="text-gray-500 hover:text-gray-900 transition-colors text-sm">Docs</a></li>
                 <li><a href="#" className="text-gray-500 hover:text-gray-900 transition-colors text-sm">Updates</a></li>
                 <li><a href="#" className="text-gray-500 hover:text-gray-900 transition-colors text-sm">Help center</a></li>
                 <li><a href="#" className="text-gray-500 hover:text-gray-900 transition-colors text-sm">Trust center</a></li>
