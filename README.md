@@ -716,6 +716,61 @@ npm run build
 ⚡ = At least one AI key required  
 🐙 = Required for GitHub integration
 
+## 📖 Documentation
+
+Nirman includes comprehensive built-in documentation accessible at `/docs`. Here's what's covered:
+
+### Getting Started
+| Section | Description |
+|---------|-------------|
+| **Introduction** | Overview of Nirman and its capabilities |
+| **Quick Start** | Get up and running in under 5 minutes |
+| **Installation** | Local development setup guide |
+| **Authentication** | JWT-based auth system |
+
+### Core Concepts
+| Section | Description |
+|---------|-------------|
+| **Projects** | Create, manage, and organize your web apps |
+| **AI Providers** | Choose from 17+ AI models |
+| **Build System** | SSE-based real-time build progress |
+| **Templates** | Pre-built templates for common use cases |
+
+### LLM Keys System
+| Section | Description |
+|---------|-------------|
+| **Universal Keys** | One API key for all providers |
+| **Key Management** | Add, remove, and rotate API keys |
+| **Credits System** | Usage tracking and billing |
+| **Rate Limits** | Provider-specific limitations |
+
+### API Reference
+| Section | Description |
+|---------|-------------|
+| **Overview** | RESTful API architecture |
+| **Authentication API** | Login, register, token refresh |
+| **Projects API** | CRUD operations for projects |
+| **Build API** | SSE streaming build system |
+| **LLM Keys API** | Universal key management |
+
+### Integrations
+| Section | Description |
+|---------|-------------|
+| **GitHub** | OAuth, repos, GitHub Pages deployment |
+| **Vercel** | Serverless deployment |
+| **Firebase** | Hosting, Firestore, Auth |
+| **Supabase** | PostgreSQL, Auth, Storage |
+
+### Guides
+| Section | Description |
+|---------|-------------|
+| **Build a Landing Page** | Step-by-step tutorial |
+| **Deploy to GitHub** | One-click deployment guide |
+| **Custom Domains** | Connect your own domain |
+| **Best Practices** | Tips for optimal results |
+
+> 📚 Access the full documentation at `http://localhost:3000/docs` when running locally.
+
 ## 🤝 Contributing
 
 1. Fork the repository
