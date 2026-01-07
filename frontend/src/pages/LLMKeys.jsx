@@ -384,7 +384,7 @@ response = client.chat.completions.create(
                   <div className="text-center mb-6">
                     <div className="text-5xl mb-4">✅</div>
                     <h2 className="text-2xl font-bold text-gray-900 mb-2">Key Created!</h2>
-                    <p className="text-amber-600 font-medium">⚠️ Save this key now! It won't be shown again.</p>
+                    <p className="text-amber-600 font-medium">⚠️ Save this key now! It will not be shown again.</p>
                   </div>
                   <div className="bg-gray-100 p-4 rounded-xl mb-6">
                     <div className="flex items-center justify-between">
