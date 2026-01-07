@@ -84,6 +84,11 @@ function App() {
               <AIKeys />
             </ProtectedRoute>
           } />
+          <Route path="/llm-keys" element={
+            <ProtectedRoute>
+              <LLMKeys />
+            </ProtectedRoute>
+          } />
           <Route path="/settings" element={
             <ProtectedRoute>
               <Settings />
