@@ -50,7 +50,10 @@ const LLMKeys = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    const loadData = async () => {
+      await fetchData();
+    };
+    loadData();
   }, []);
 
   const handleCreateKey = async () => {
