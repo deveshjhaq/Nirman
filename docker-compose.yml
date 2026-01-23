@@ -1,0 +1,114 @@
+# =============================================================================
+# Nirman - Docker Compose Configuration
+# =============================================================================
+# Usage:
+#   Development: docker-compose up
+#   Production:  docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+# =============================================================================
+
+version: '3.8'
+
+services:
+  # ===========================================================================
+  # MongoDB Database
+  # ===========================================================================
+  mongodb:
+    image: mongo:7.0
+    container_name: nirman-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: nirman
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - nirman-network
+
+  # ===========================================================================
+  # Backend API (FastAPI)
+  # ===========================================================================
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: nirman-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    environment:
+      - MONGO_URL=mongodb://mongodb:27017
+      - DB_NAME=nirman
+      - JWT_SECRET=${JWT_SECRET:-change-this-in-production}
+      - FRONTEND_URL=http://localhost:3000
+      # AI Keys - pass from host .env
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - CLAUDE_API_KEY=${CLAUDE_API_KEY:-}
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY:-}
+      - DEFAULT_AI_PROVIDER=${DEFAULT_AI_PROVIDER:-gemini}
+    volumes:
+      - ./backend:/app:cached
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - nirman-network
+
+  # ===========================================================================
+  # Frontend (React)
+  # ===========================================================================
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: nirman-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    environment:
+      - REACT_APP_BACKEND_URL=http://localhost:8000
+    networks:
+      - nirman-network
+
+  # ===========================================================================
+  # Redis (Optional - for production caching/sessions)
+  # ===========================================================================
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: nirman-redis
+  #   restart: unless-stopped
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis_data:/data
+  #   networks:
+  #     - nirman-network
+
+# =============================================================================
+# Volumes
+# =============================================================================
+volumes:
+  mongodb_data:
+    driver: local
+  # redis_data:
+  #   driver: local
+
+# =============================================================================
+# Networks
+# =============================================================================
+networks:
+  nirman-network:
+    driver: bridge
