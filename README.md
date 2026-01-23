@@ -254,6 +254,38 @@ yarn start
 
 Frontend runs at `http://localhost:3000`, Backend at `http://localhost:8000`
 
+### 🐳 Docker Setup (Recommended)
+
+Run the entire stack with Docker Compose:
+
+```bash
+# 1. Copy environment files
+cp backend/.env.example backend/.env
+# Edit backend/.env with your API keys
+
+# 2. Start all services
+docker-compose up -d
+
+# 3. Check status
+docker-compose ps
+
+# 4. View logs
+docker-compose logs -f
+```
+
+Services:
+- **Frontend**: http://localhost:3000
+- **Backend**: http://localhost:8000
+- **MongoDB**: localhost:27017
+
+```bash
+# Stop services
+docker-compose down
+
+# Rebuild after changes
+docker-compose up -d --build
+```
+
 ## 🌟 Key Features
 
 ### 🤖 AI-Powered Builder
